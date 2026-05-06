@@ -3,41 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Escola Municipal Esperança</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 25px; background: #f5f5f5; }
-        h1   { color: #111184; font-size: 30px; font-weight: bold; text-align: left; }
-        p    { color: #555; font-size: 18px; font-weight: semi-bold;}
-
-        .btn { display: inline-block; padding: 6px 20px; font-size: 20px; border-radius: 4px;
-               border: none; cursor: pointer; text-decoration: none; margin-right: 6px; text-align: center; }
-        .btn-azulnovo { background: #111184; color: white; width: 745px; font-weight: bold; font-size: 16px; }
-        .btn-roxo     { background: #767676; color: white; }
-        .btn-azul     { background: #111184; color: white;  width: 200px; font-size: 13px; padding: 5px 10px; }
-        .btn-vermelho { background: #d13239; color: white; font-size: 13px; padding: 5px 10px; }
-
-        table { border-collapse: collapse; width: 100%; background: white; margin-top: 15px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background: #111184; color: white; }
-        tr:hover { background: #c9c8c8; }
-
-        .VERDE    { font-weight: bold; color: #008300; }
-        .AMARELO  { font-weight: bold; color: #b8860b; }
-        .VERMELHO { font-weight: bold; color: #d13239; }
-
-        .MELHORANDO { color: #008300; font-weight: bold; }
-        .PIORANDO   { color: #d13239; font-weight: bold; }
-        .ESTÁVEL    { color: #b8860b; font-weight: bold; }
-    
-    </style>
+    <link rel="stylesheet" href="/static/index.css">
 </head>
+
 <body>
 
     <h1>Escola Municipal Esperança</h1>
     <p>Sistema Integrado de Acompanhamento Escolar - Prevenção de evasão e Análise de notas</p>
-
-    <a href="/novo" class="btn btn-azulnovo" >Novo  Aluno</a>
-
-<br><br>
 
 <table>
     <tr>
@@ -81,6 +53,43 @@
     </tr>
     {% endif %}
 </table>
+
+<section .container="class">
+    <a href="/novo" class="btn btn-azulnovo" >Novo  Aluno</a>
+</section>
+
+<footer>
+    <div class="container">
+        <!-- ul 1 -->
+        <ul>
+            <h3>Escola Municipal Esperança</h3>
+            <p>Sistema de Integrado de Acompanhamento Escolar</p>
+        </ul>
+        <!-- final ul 1 -->
+
+        <!-- ul 2 -->
+        <ul>
+            <h3>Endereço</h3>
+            <li><a href="https://maps.app.goo.gl/Z8ZNp4vn3eY9Aigf6">São Francisco/Cohama</a></li>
+            <li>
+                <p>R. das Limeiras - Jardim Renascença, São Luís - MA, 65075-200</p>
+            </li>
+        </ul>
+        <!-- Final ul 2 -->
+        
+        <!-- ul 3-->
+        <ul>
+            <h3>Contatos</h3>
+            <li>
+                <p>98 9 9854-6699</p>
+            </li>
+            <li>
+                <p>escolaesperança@email.com</p>
+            </li>
+        </ul>
+         <!-- final ul3 -->
+    </div>
+</footer>
 
 </body>
 </html>

@@ -1,0 +1,16 @@
+        body { font-family: Arial, sans-serif; margin: 30px; background: #f5f5f5; }
+        h1   { color: #333; }
+
+        .caixa { background: white; border: 1px solid #ccc; padding: 20px;
+                 max-width: 450px; border-radius: 6px; }
+        .caixa p { font-size: 16px; margin: 8px 0; }
+
+        .risco { font-size: 22px; font-weight: bold; padding: 10px 16px;
+                 border-radius: 6px; display: inline-block; margin-top: 10px; }
+        .VERDE    { background: #c8f7c5; color: green; }
+        .AMARELO  { background: #fef9c3; color: #b8860b; }
+        .VERMELHO { background: #fdd;    color: red; }
+
+        .acao { margin-top: 15px; padding: 12px; border-left: 4px solid #888;
+                background: #f9f9f9; font-size: 15px; }
+        a { color: #3498db; }
