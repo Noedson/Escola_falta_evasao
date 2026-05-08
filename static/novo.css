@@ -1,16 +1,98 @@
-        body { font-family: Arial, sans-serif; margin: 30px; background: #f5f5f5; }
-        h1   { color: #333; }
+body { 
+    font-size: 16px; 
+    font-family: Arial, sans-serif; 
+    background: #f8f9fa; 
+    margin: 0; 
+    padding: 0;
+}
 
-        .caixa { background: white; border: 1px solid #ccc; padding: 20px;
-                 max-width: 450px; border-radius: 6px; }
-        .caixa p { font-size: 16px; margin: 8px 0; }
+h1 {
+    background-color: #111184; 
+    color: #f4f4f4; 
+    padding: 30px;
+    font-size: 30px; 
+    font-weight: bold; 
+    text-align: left; 
+    margin-top: 0;
+    margin-bottom: 10px;
+} 
 
-        .risco { font-size: 22px; font-weight: bold; padding: 10px 16px;
-                 border-radius: 6px; display: inline-block; margin-top: 10px; }
-        .VERDE    { background: #c8f7c5; color: green; }
-        .AMARELO  { background: #fef9c3; color: #b8860b; }
-        .VERMELHO { background: #fdd;    color: red; }
+.btn-azulnovo, footer a {
+    color: #ffffff;
+    text-decoration-line: none;
+    padding: 10px 20px;
+    background: #111184;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 4px;
+    border: 1px solid #111184;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+    cursor: pointer;
+}
 
-        .acao { margin-top: 15px; padding: 12px; border-left: 4px solid #888;
-                background: #f9f9f9; font-size: 15px; }
-        a { color: #3498db; }
+.formulario {
+    background: #ffffff; 
+    border: 1px solid #ccc;
+    padding: 20px; 
+    max-width: 600px;
+    border-radius: 6px; 
+    margin-bottom: 20px;
+    justify-content: center;
+    width: 100%;
+    
+
+}
+
+.linha-check {
+    display: block; 
+    align-items: center; 
+    margin-bottom: 10px;
+    color: #000000;
+
+}
+.grade-grid {
+        display: grid; 
+    grid-template:      
+        "n1 n2 n3"
+        "n4 n5 n6" 
+        / 1fr 1fr 1fr;
+}
+
+input[type="number"], input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+
+
+label {
+    font-weight: bold;
+}
+
+/* footer */
+
+input [type="submit"] {
+    background-color: #111184;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+a {
+    color: #111184;
+    text-decoration-line: none;
+}
