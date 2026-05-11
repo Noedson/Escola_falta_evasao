@@ -30,17 +30,15 @@ h2 {
 
 /* Botão de Novo Aluno */
 .btn-azulnovo:hover { 
-    background: #f4f4f4; 
-    color: #111184; 
+    background: #04043b; 
+    color: #f4f4f4; 
     font-weight: bold; 
     font-size: 18px;
     border-radius: 4px;
     border-style: solid;
     border-width: 1px;
-    border-color: #111184;
     text-align: center;
     display: flex;
-    justify-content: center;
     width: 100%;
 
 }
@@ -53,8 +51,6 @@ h2 {
     border-radius: 4px;
     border-style: solid;
     border-width: 1px;
-    border-color: #111184;
-    text-align: center;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -86,12 +82,20 @@ h2 {
     padding: 5px 10px;
 
 }
-    
+.btn-azul:hover {  
+    background: #04043b; 
+    color: white;  
+    width: 200px; 
+    font-size: 13px;
+    padding: 5px 10px;
+
+}
 .btn-vermelho { 
     background: #d13239; 
     color: white; 
     font-size: 13px; 
-    padding: 5px 10px; }
+    padding: 5px 10px; 
+}
 
 /* tabela */
 table { 
