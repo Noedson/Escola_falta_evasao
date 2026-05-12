@@ -24,11 +24,11 @@ h1 {
 h2 { 
     color: #111183; 
 }
+
 section {
     margin-bottom: 30px; 
     text-align: left;
     flex: 1;
-    
 }
 
 .caixa {

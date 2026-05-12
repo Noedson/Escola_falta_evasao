@@ -99,6 +99,19 @@ input[type="text"] {
     padding: 5px 10px;
 
 }
+.btn-relatorio{
+background: #111184;
+    color: #f4f4f4;
+    font-weight: bold;
+    font-size: 16px;       
+    border-radius: 4px;
+    border: none;         
+    padding: 10px 20px;    
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
 .btn-vermelho { 
     background: #d13239; 
     color: white; 
@@ -120,6 +133,7 @@ th, td {
     border: 1px solid #ccc; 
     padding: 10px; 
     text-align: center; 
+    font-size: 14px;
 }
 
 th {

@@ -20,6 +20,7 @@ def ler_alunos():
         aluno = {
             "indice"     : i,
             "nome"       : linha["Nome"],
+            "serie"      : int(linha["serie"]) if pd.notna(linha["serie"]) else 0,    
             "media"      : float(linha["Media "]),
             "frequencia" : float(linha["Frequencia"]),
             "ocorrencias": int(linha["Ocorrencias"]),
@@ -30,7 +31,6 @@ def ler_alunos():
         alunos.append(aluno)
 
     return alunos
-
 
 def classificar_risco(media, frequencia, ocorrencias, baixa_renda, trabalha):
 
@@ -205,6 +205,62 @@ def excluir_aluno(indice):
     df = df.drop(index=indice)
     df.to_excel(PLANILHA, index=False)
     return redirect("/")
+
+@app.route("/relatorio")
+def gerar_relatorio():
+    alunos = ler_alunos()
+    
+    # Dicionário para guardar o relatório separado por série
+    relatorios_por_serie = {}
+
+    for aluno in alunos:
+        serie = aluno["serie"]
+        
+        # Se a série ainda não está no dicionário, cria a estrutura para ela
+        if serie not in relatorios_por_serie:
+            relatorios_por_serie[serie] = {
+                "total_alunos": 0,
+                "risco_vermelho": 0,
+                "risco_amarelo": 0,
+                "risco_verde": 0,
+                "tendencia_piorando": 0,
+                "lista_risco_critico": [],
+                "lista_piorando": []
+            }
+
+        # 1. Classifica o risco
+        risco = classificar_risco(
+            aluno["media"],
+            aluno["frequencia"],
+            aluno["ocorrencias"],
+            aluno["baixa_renda"],
+            aluno["trabalha"]
+        )
+        
+        # 2. Analisa a tendência de notas
+        analise = analisar_notas(aluno["notas"])
+        tendencia = analise["tendencia"]
+        
+        # 3. Atualiza os contadores da série específica
+        relatorios_por_serie[serie]["total_alunos"] += 1
+        
+        if risco == "VERMELHO":
+            relatorios_por_serie[serie]["risco_vermelho"] += 1
+            relatorios_por_serie[serie]["lista_risco_critico"].append(aluno["nome"])
+        elif risco == "AMARELO":
+            relatorios_por_serie[serie]["risco_amarelo"] += 1
+        elif risco == "VERDE":
+            relatorios_por_serie[serie]["risco_verde"] += 1
+            
+        # 4. Atualiza os contadores de Tendência da série
+        if tendencia == "PIORANDO":
+            relatorios_por_serie[serie]["tendencia_piorando"] += 1
+            relatorios_por_serie[serie]["lista_piorando"].append(aluno["nome"])
+
+    # Ordena o dicionário pelas chaves (séries) para mostrar a 8ª antes da 9ª no HTML
+    relatorios_ordenados = dict(sorted(relatorios_por_serie.items()))
+
+    return render_template("relatorio.html", relatorios=relatorios_ordenados)
 
 if __name__ == "__main__":
     app.run(debug=True)
