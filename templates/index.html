@@ -6,90 +6,89 @@
     <link rel="stylesheet" href="/static/index.css">
 </head>
 
-<body>
+<body>  
+    
+<h1>SIAE - Sistema de Integrado de Acompanhamento Escolar</h1>
 
-    <h1>SIAE - Sistema de Integrado de Acompanhamento Escolar</h1>
-    <h2>Escola Municipal Esperança</h2>
-    <p><a href="/novo" class="btn btn-azulnovo" >Novo  Aluno</a></p>
-<table>
-    <tr>
-        <th></th>
-        <th>Nome</th>
-        <th>Risco de Evasão</th>
-        <th>Tendência de Notas</th>
-        <th>Ações</th>
-    </tr>
+    <section>
+        <h2>Escola Municipal Esperança</h2>
 
-    {% for aluno in alunos %}
-    <tr>
-        <td>{{ loop.index }}</td>
-        <td>
-            {{ aluno.nome }}
-            {% if aluno.analise.alerta_critico %}
-                
-            {% endif %}
-        </td>
-        <td class="{{ aluno.risco }}">
-            {% if aluno.risco == "VERDE" %}     BAIXO
-            {% elif aluno.risco == "AMARELO" %} MODERADO
-            {% else %}                          ALTO
-            {% endif %}
-        </td>
-        <td class="{{ aluno.analise.tendencia }}">
-            {% if aluno.analise.tendencia == "MELHORANDO" %}   MELHORANDO
-            {% elif aluno.analise.tendencia == "PIORANDO" %}   PIORANDO
-            {% else %}                                         ESTÁVEL
-            {% endif %}
-        </td>
-        <td>
-            <a href="/aluno/{{ aluno.indice }}"  class="btn btn-azul">Ver detalhes</a>
-        </td>
-    </tr>
-    {% endfor %}
+        <div class="barra-topo">
+            <a href="/novo" class="btn-azulnovo">Novo Aluno</a>
+            <input type="text" id="busca" placeholder="Buscar aluno..." onkeyup="buscar()">
+        </div>  
 
-    {% if alunos | length == 0 %}
-    <tr>
-        <td colspan="5" style="text-align:center;color:#999">Nenhum aluno cadastrado.</td>
-    </tr>
-    {% endif %}
-</table>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nome</th>
+                    <th>Risco de Evasão</th>
+                    <th>Tendência de Notas</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for aluno in alunos %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ aluno.nome }}</td>
+                    <td class="{{ aluno.risco }}">
+                        {% if aluno.risco == "VERDE" %}     BAIXO
+                        {% elif aluno.risco == "AMARELO" %} MODERADO
+                        {% else %}                          ALTO
+                        {% endif %}
+                    </td>
+                    <td class="{{ aluno.analise.tendencia }}">
+                        {% if aluno.analise.tendencia == "MELHORANDO" %}   MELHORANDO
+                        {% elif aluno.analise.tendencia == "PIORANDO" %}   PIORANDO
+                        {% else %}                                         ESTÁVEL
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="/aluno/{{ aluno.indice }}" class="btn btn-azul">Ver detalhes</a>
+                    </td>
+                </tr>
+                {% endfor %}
 
-<section .container="class">
-   
-</section>
+                {% if alunos | length == 0 %}
+                <tr>
+                    <td colspan="5" style="text-align:center;color:#999">Nenhum aluno cadastrado.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </section>
 
 <footer>
     <div class="container">
-        <!-- ul 1 -->
         <ul>
             <h3>Escola Municipal Esperança</h3>
             <p>Sistema de Integrado de Acompanhamento Escolar</p>
         </ul>
-        <!-- final ul 1 -->
-
-        <!-- ul 2 -->
         <ul>
             <h3>Endereço</h3>
             <li><a href="https://maps.app.goo.gl/Z8ZNp4vn3eY9Aigf6">São Francisco/Cohama</a></li>
-            <li>
-                <p>Rua das Limeiras, Quadra C, Nº 05, Bairro: Jardim Renascença</p>
-            </li>
+            <li><p>Rua das Limeiras, Quadra C, Nº 05, Bairro: Jardim Renascença</p></li>
         </ul>
-        <!-- Final ul 2 -->
-        
-        <!-- ul 3-->
         <ul>
             <h3>Contatos</h3>
-            <li>
-                <p><a href="tel:(98) 99108-5766"> (98) 99108-5766</a></p>
-            </li>
-            <li>
-                <p><a href="mailto:ctsaofrancisco.cohama@gmail.com">ctsaofrancisco.cohama@gmail.com</a ></p>
-            </li>
+            <li><p><a href="tel:(98) 99108-5766">(98) 99108-5766</a></p></li>
+            <li><p><a href="mailto:ctsaofrancisco.cohama@gmail.com">ctsaofrancisco.cohama@gmail.com</a></p></li>
         </ul>
-         <!-- final ul3 -->
     </div>
 </footer>
+
+<script>
+    function buscar() {
+        let texto = document.getElementById("busca").value.toLowerCase();
+        let linhas = document.querySelectorAll("tbody tr");
+        linhas.forEach(function(linha) {
+            let nome = linha.cells[1].textContent.toLowerCase();
+            linha.style.display = nome.includes(texto) ? "" : "none";
+        });
+    }
+</script>
 
 </body>
 </html>
