@@ -3,84 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>Escola Municipal Esperança</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 25px; background: #f5f5f5; }
-        h1   { color: #111184; font-size: 30px; font-weight: bold; text-align: left; }
-        p    { color: #555; font-size: 18px; font-weight: semi-bold;}
-
-        .btn { display: inline-block; padding: 6px 20px; font-size: 20px; border-radius: 4px;
-               border: none; cursor: pointer; text-decoration: none; margin-right: 6px; text-align: center; }
-        .btn-azulnovo { background: #111184; color: white; width: 745px; font-weight: bold; font-size: 16px; }
-        .btn-roxo     { background: #767676; color: white; }
-        .btn-azul     { background: #111184; color: white;  width: 200px; font-size: 13px; padding: 5px 10px; }
-        .btn-vermelho { background: #d13239; color: white; font-size: 13px; padding: 5px 10px; }
-
-        table { border-collapse: collapse; width: 100%; background: white; margin-top: 15px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background: #111184; color: white; }
-        tr:hover { background: #c9c8c8; }
-
-        .VERDE    { font-weight: bold; color: #008300; }
-        .AMARELO  { font-weight: bold; color: #b8860b; }
-        .VERMELHO { font-weight: bold; color: #d13239; }
-
-        .MELHORANDO { color: #008300; font-weight: bold; }
-        .PIORANDO   { color: #d13239; font-weight: bold; }
-        .ESTÁVEL    { color: #b8860b; font-weight: bold; }
-    
-    </style>
+    <link rel="stylesheet" href="/static/index.css">
 </head>
-<body>
 
-    <h1>Escola Municipal Esperança</h1>
-    <p>Sistema Integrado de Acompanhamento Escolar - Prevenção de evasão e Análise de notas</p>
+<body>  
+    
+<h1>SIAE - Sistema de Integrado de Acompanhamento Escolar</h1>
 
-    <a href="/novo" class="btn btn-azulnovo" >Novo  Aluno</a>
+    <section>
+        <h2>Escola Municipal Esperança</h2>
 
-<br><br>
+        <div class="barra-topo">
+            <a href="/relatorio" class="btn-relatorio">Relatório por Turma</a>
+            <a href="/novo" class="btn-azulnovo">Novo Aluno</a>
+            <input type="text" id="busca" placeholder="Buscar aluno..." onkeyup="buscar()">
+        </div>  
 
-<table>
-    <tr>
-        <th></th>
-        <th>Nome</th>
-        <th>Risco de Evasão</th>
-        <th>Tendência de Notas</th>
-        <th>Ações</th>
-    </tr>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nome</th>
+                    <th>Risco de Evasão</th>
+                    <th>Tendência de Notas</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for aluno in alunos %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ aluno.nome }}</td>
+                    <td class="{{ aluno.risco }}">
+                        {% if aluno.risco == "VERDE" %}     BAIXO
+                        {% elif aluno.risco == "AMARELO" %} MODERADO
+                        {% else %}                          ALTO
+                        {% endif %}
+                    </td>
+                    <td class="{{ aluno.analise.tendencia }}">
+                        {% if aluno.analise.tendencia == "MELHORANDO" %}   MELHORANDO
+                        {% elif aluno.analise.tendencia == "PIORANDO" %}   PIORANDO
+                        {% else %}                                         ESTÁVEL
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="/aluno/{{ aluno.indice }}" class="btn btn-azul">Ver detalhes</a>
+                    </td>
+                </tr>
+                {% endfor %}
 
-    {% for aluno in alunos %}
-    <tr>
-        <td>{{ loop.index }}</td>
-        <td>
-            {{ aluno.nome }}
-            {% if aluno.analise.alerta_critico %}
-                
-            {% endif %}
-        </td>
-        <td class="{{ aluno.risco }}">
-            {% if aluno.risco == "VERDE" %}     BAIXO
-            {% elif aluno.risco == "AMARELO" %} MODERADO
-            {% else %}                          ALTO
-            {% endif %}
-        </td>
-        <td class="{{ aluno.analise.tendencia }}">
-            {% if aluno.analise.tendencia == "MELHORANDO" %}   MELHORANDO
-            {% elif aluno.analise.tendencia == "PIORANDO" %}   PIORANDO
-            {% else %}                                         ESTÁVEL
-            {% endif %}
-        </td>
-        <td>
-            <a href="/aluno/{{ aluno.indice }}"  class="btn btn-azul">Ver detalhes</a>
-        </td>
-    </tr>
-    {% endfor %}
+                {% if alunos | length == 0 %}
+                <tr>
+                    <td colspan="5" style="text-align:center;color:#999">Nenhum aluno cadastrado.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </section>
 
-    {% if alunos | length == 0 %}
-    <tr>
-        <td colspan="5" style="text-align:center;color:#999">Nenhum aluno cadastrado.</td>
-    </tr>
-    {% endif %}
-</table>
+<footer>
+    <div class="container">
+        <ul>
+            <h3>Escola Municipal Esperança</h3>
+            <p>Sistema de Integrado de Acompanhamento Escolar</p>
+        </ul>
+        <ul>
+            <h3>Endereço</h3>
+            <li><a href="https://maps.app.goo.gl/Z8ZNp4vn3eY9Aigf6">São Francisco/Cohama</a></li>
+            <li><p>Rua das Limeiras, Quadra C, Nº 05, Bairro: Jardim Renascença</p></li>
+        </ul>
+        <ul>
+            <h3>Contatos</h3>
+            <li><p><a href="tel:(98) 99108-5766">(98) 99108-5766</a></p></li>
+            <li><p><a href="mailto:ctsaofrancisco.cohama@gmail.com">ctsaofrancisco.cohama@gmail.com</a></p></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+    function buscar() {
+        let texto = document.getElementById("busca").value.toLowerCase();
+        let linhas = document.querySelectorAll("tbody tr");
+        linhas.forEach(function(linha) {
+            let nome = linha.cells[1].textContent.toLowerCase();
+            linha.style.display = nome.includes(texto) ? "" : "none";
+        });
+    }
+</script>
 
 </body>
 </html>

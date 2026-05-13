@@ -3,65 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ aluno.nome }}</title>
-    <style>
-        body { font-size: 16px; font-family: Arial, sans-serif; margin: 30px; background: #f8f9fa; }
-        h1, h2 { color: #111184; }
-
-        .caixa {
-            background: white; border: 1px solid #ccc;
-            padding: 20px; max-width: 600px;
-            border-radius: 6px; margin-bottom: 20px;
-        }
-        .caixa p { font-size: 18px; margin: 8px 0; }
-
-        .risco {
-            font-size: 22px; font-weight: bold;
-            padding: 10px 16px; border-radius: 6px;
-            display: inline-block; margin-top: 10px;
-        }
-        .VERDE    { background: #c8f7c5; color: green; }
-        .AMARELO  { background: #fef9c3; color: #b8860b; }
-        .VERMELHO { background: #fdd;    color: red; }
-
-        .acao {
-            margin-top: 15px; padding: 12px;
-            border-left: 4px solid #111184;
-            background: #f9f9f9; font-size: 16px;
-        }
-
-        .alerta-critico {
-            background: #fdd; border: 2px solid red;
-            border-radius: 6px; padding: 15px;
-            margin-bottom: 14px; font-weight: bold; color: red;
-        }
-
-        .nota-linha { padding: 8px 0; font-size: 15px; }
-        .nota-subiu  { color: green; }
-        .nota-caiu   { color: red; }
-        .nota-igual  { color: #000000; }
-        .nota-falta  { color: #aaa; }
-
-        .badge-media {
-            display: inline-block;
-            background: #e7f0ff; border: 1px solid #050709;
-            border-radius: 5px; padding: 5px 10px;
-            font-size: 15px; margin: 3px 2px;
-            color: #050709;
-        }
-
-        a {
-            text-decoration-line: none;
-             margin-top: 30px; padding: 10px 20px;
-             background: #111184; color: white;
-             border: none; border-radius: 4px;
-             font-size: 16px; cursor: pointer; font-weight: normal;  
-             color: #ffffff;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='aluno.css') }}">
 </head>
 <body>
 
 <h1> {{ aluno.nome }}</h1>
+
+<section>
 
 <!-- CAIXA 1: Dados gerais e risco -->
 <div class="caixa">
@@ -155,7 +103,16 @@
     {% endfor %}
 </div>
 
-<a href="/" class="btn-azul"> Voltar para a lista</a>
+<!-- botão para excluir aluno -->
+<a href="/excluir/{{ aluno.indice }}">
+    <button class="btn-vermelho">Excluir Aluno</button>
+</a>
+
+</section>
+
+<footer>
+    <a href="/"> Voltar para a lista</a>
+</footer>
 
 </body>
 </html>

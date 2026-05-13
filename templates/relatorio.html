@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório por Turma</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='relatorio.css') }}">
+</head>
+<body>
+    <h1>Relatório de Situação dos Alunos por Série</h1>
+    <p class="subtitulo">Resumo de risco de evasão e tendência de notas por turma.</p>
+
+    <a href="/" class="btn-voltar">Voltar para o Início</a>
+
+    {% for serie, dados in relatorios.items() %}
+        <div class="relatorio">
+            <h2>{{ serie }}ª Série</h2>
+
+            <div class="resumo-grid">
+                <div class="indicador">
+                    <span>Total de alunos</span>
+                    <strong>{{ dados.total_alunos }}</strong>
+                </div>
+                <div class="indicador">
+                    <span>Risco crítico</span>
+                    <strong class="VERMELHO">{{ dados.risco_vermelho }}</strong>
+                </div>
+                <div class="indicador">
+                    <span>Risco de atenção</span>
+                    <strong class="AMARELO">{{ dados.risco_amarelo }}</strong>
+                </div>
+                <div class="indicador">
+                    <span>Risco baixo</span>
+                    <strong class="VERDE">{{ dados.risco_verde }}</strong>
+                </div>
+                <div class="indicador">
+                    <span>Notas piorando</span>
+                    <strong class="PIORANDO">{{ dados.tendencia_piorando }}</strong>
+                </div>
+            </div>
+
+            <h3>Status de Risco da Turma</h3>
+            <table>
+                <tr>
+                    <th>Classificação</th>
+                    <th>Quantidade</th>
+                </tr>
+                <tr>
+                    <td class="VERMELHO"><strong>Risco Alto (Crítico)</strong></td>
+                    <td>{{ dados.risco_vermelho }} alunos</td>
+                </tr>
+                <tr>
+                    <td class="AMARELO"><strong>Risco Moderado (Atenção)</strong></td>
+                    <td>{{ dados.risco_amarelo }} alunos</td>
+                </tr>
+                <tr>
+                    <td class="VERDE"><strong>Risco Baixo </strong></td>
+                    <td>{{ dados.risco_verde }} alunos</td>
+                </tr>
+            </table>
+
+            <h4>Piores Casos da {{ serie }}ª Série (Risco Crítico)</h4>
+        {% if dados.lista_risco_critico %}
+            <ul class="lista-alunos">
+            {% for nome in dados.lista_risco_critico %}
+                <li>{{ nome }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p class="mensagem-vazia">Nenhum aluno em risco crítico nesta turma.</p>
+        {% endif %}
+
+            <h4>Alunos da {{ serie }}ª Série com Notas Piorando</h4>
+        {% if dados.lista_piorando %}
+            <ul class="lista-alunos">
+            {% for nome in dados.lista_piorando %}
+                <li>{{ nome }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p class="mensagem-vazia">Nenhum aluno com tendência de queda nas notas nesta turma.</p>
+        {% endif %}
+        </div>
+    {% endfor %}
+
+</body>
+</html>
