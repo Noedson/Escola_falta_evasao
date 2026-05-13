@@ -9,7 +9,7 @@
     <h1>Relatório de Situação dos Alunos por Série</h1>
     <p class="subtitulo">Resumo de risco de evasão e tendência de notas por turma.</p>
 
-    <a href="/" class="btn">Voltar para o Início</a>
+    <a href="/" class="btn-voltar">Voltar para o Início</a>
 
     {% for serie, dados in relatorios.items() %}
         <div class="relatorio">
@@ -45,15 +45,15 @@
                     <th>Quantidade</th>
                 </tr>
                 <tr>
-                    <td class="VERMELHO"><strong>Risco Vermelho (Crítico)</strong></td>
+                    <td class="VERMELHO"><strong>Risco Alto (Crítico)</strong></td>
                     <td>{{ dados.risco_vermelho }} alunos</td>
                 </tr>
                 <tr>
-                    <td class="AMARELO"><strong>Risco Amarelo (Atenção)</strong></td>
+                    <td class="AMARELO"><strong>Risco Moderado (Atenção)</strong></td>
                     <td>{{ dados.risco_amarelo }} alunos</td>
                 </tr>
                 <tr>
-                    <td class="VERDE"><strong>Risco Verde (Tudo Certo)</strong></td>
+                    <td class="VERDE"><strong>Risco Baixo </strong></td>
                     <td>{{ dados.risco_verde }} alunos</td>
                 </tr>
             </table>
