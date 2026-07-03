@@ -272,3 +272,4 @@ def gerar_relatorio():
 
 if __name__ == "__main__":
     app.run(debug=True)
+#app para executar o menu principal
